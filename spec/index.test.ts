@@ -51,5 +51,22 @@ describe('input#productName', () => {
 
     expect(submitButton.disabled).toBe(false)
   })
+
+  it('should revert submit button to disabled when changed back to original value', (): void => {
+    const event = new Event("change")
+
+    const testInput: HTMLInputElement = document.querySelector('#productName')
+    const submitButton: HTMLInputElement = document.querySelector('#testButton')
+
+    testInput.value = 'foo'
+    testInput.dispatchEvent(event)
+
+    expect(submitButton.disabled).toBe(false)
+
+    testInput.value = 'xxx'
+    testInput.dispatchEvent(event)
+
+    expect(submitButton.disabled).toBe(true)
+  })
 })
 
