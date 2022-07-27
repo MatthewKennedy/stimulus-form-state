@@ -6,7 +6,7 @@ export default class extends Controller {
 
   static targets = ['submitButton', 'watch']
 
-  connect (){
+  connect () {
     this.inputWatcher()
   }
 
