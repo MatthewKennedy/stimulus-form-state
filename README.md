@@ -2,7 +2,8 @@
 
 ## Getting started
 
-A Stimulus controller for tracking changes to form inputs.
+A Stimulus controller for tracking changes to form elements such as: `<input>`, `<select>`, `<textarea>` and many more,
+allowing you to manipulate the form submit `<button>` or other DOM elements if a form has been changed from its original state.
 
 ## 📚 Documentation
 
