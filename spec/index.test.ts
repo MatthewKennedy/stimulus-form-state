@@ -26,6 +26,12 @@ beforeEach((): void => {
         <option value="3">Three</option>
       </select>
 
+      <select id="testMultipleSingle" multiple data-form-state-target="watch">
+        <option selected value="1">One</option>
+        <option selected value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+
       <button id="testButton" name="button" type="submit" data-form-state-target="submitButton" >
         Update
       </button>
@@ -141,6 +147,43 @@ describe('select (single no empty value)', () => {
     expect(submitButton.disabled).toBe(false)
 
     testEl[0].selected = true
+    testEl.dispatchEvent(event)
+
+    expect(submitButton.disabled).toBe(true)
+  })
+})
+
+
+describe('select (multiple no empty value)', () => {
+  it('should have Stimulus action attribute added', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
+    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
+  })
+
+  it('should enable submit button when changed', (): void => {
+    const event = new Event("change")
+    const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl[0].selected = false
+    testEl[1].selected = false
+
+    testEl.dispatchEvent(event)
+
+    expect(submitButton.disabled).toBe(false)
+  })
+
+  it('should revert submit button to disabled when changed back to original value', (): void => {
+    const event = new Event("change")
+    const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl[2].selected = true
+    testEl.dispatchEvent(event)
+
+    expect(submitButton.disabled).toBe(false)
+
+    testEl[2].selected = false
     testEl.dispatchEvent(event)
 
     expect(submitButton.disabled).toBe(true)
