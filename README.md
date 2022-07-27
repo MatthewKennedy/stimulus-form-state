@@ -1,4 +1,6 @@
 # Stimulus Form State
+[![Test](https://github.com/MatthewKennedy/stimulus-form-state/actions/workflows/test.yml/badge.svg)](https://github.com/MatthewKennedy/stimulus-form-state/actions/workflows/test.yml)
+[![Lint](https://github.com/MatthewKennedy/stimulus-form-state/actions/workflows/lint.yml/badge.svg)](https://github.com/MatthewKennedy/stimulus-form-state/actions/workflows/lint.yml)
 
 ## Getting started
 
@@ -7,7 +9,7 @@ allowing you to manipulate the form submit `<button>` or other DOM elements if a
 
 ## 📚 Documentation
 
-### install
+### Install
 ```bash
 yarn add stimulus-form-state
 ```
@@ -36,7 +38,7 @@ export default class extends StimulusFormState {
 
 ```
 
-### In the DOM
+### In The DOM
 
 Add `data-controller="form-state"` to the form element wrapping the elements you want to track the state of, and the submit button.
 
