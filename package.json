@@ -1,0 +1,53 @@
+{
+  "name": "stimulus-form-state",
+  "version": "0.0.1",
+  "description": "A Stimulus controller for tracking changes on form elements.",
+  "keywords": [
+    "stimulus",
+    "stimulusjs"
+  ],
+  "repository": "git@github.com:matthewkennedy/stimulus-form-state.git",
+  "bugs": {
+    "url": "https://github.com/matthewkennedy/stimulus-form-state/issues"
+  },
+  "author": "Matthew Kennedy <m.kennedy@me.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/matthewkennedy/stimulus-form-state",
+  "private": false,
+  "main": "dist/stimulus-form-state.umd.js",
+  "module": "dist/stimulus-form-state.es.js",
+  "scripts": {
+    "format": "prettier-standard  '**/*.{ts,css,html}' --format",
+    "lint": "prettier-standard  '**/*.{ts,css,html}' --lint",
+    "dev": "vite",
+    "prod": "vite build --config /dev/null",
+    "build": "tsc --noEmit && vite build",
+    "version": "yarn build",
+    "test": "BABEL_ENV=test jest",
+    "np": "np --no-2fa"
+  },
+  "devDependencies": {
+    "@babel/core": "7.17.9",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@hotwired/stimulus": "^3.0.1",
+    "@types/jest": "^27.4.1",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
+    "mutationobserver-shim": "^0.3.7",
+    "np": "^7.6.1",
+    "prettier-standard": "16.4.1",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5"
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest/jest-setup.ts"
+    ]
+  }
+}
