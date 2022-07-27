@@ -3,50 +3,30 @@
  */
 
 import { Application } from '@hotwired/stimulus'
-import CheckboxSelectAll from '../src/index'
+import FormStateController from '../src/index'
 
 const startStimulus = (): void => {
   const application = Application.start()
-  application.register('checkbox-select-all', CheckboxSelectAll)
+  application.register('form-state', FormStateController)
 }
 
 beforeEach((): void => {
   startStimulus()
 
   document.body.innerHTML = `
-    <form data-controller="checkbox-select-all">
-      <input id="checkbox-select-all" type="checkbox" data-checkbox-select-all-target="checkboxAll" />
-      <input type="checkbox" data-checkbox-select-all-target="checkbox" />
-      <input type="checkbox" data-checkbox-select-all-target="checkbox" checked="checked" />
-      <input type="checkbox" data-checkbox-select-all-target="checkbox" />
+    <form data-controller="form-state">
+      <button id="testButton" name="button" type="submit" data-form-state-target="submitButton" >
+        Update
+      </button>
     </form>
   `
 })
 
-describe('#toggle', () => {
-  it('should select all checkboxes', (): void => {
-    const toggleCheckbox: HTMLInputElement = document.querySelector('#checkbox-select-all')
-    const targetsBefore: NodeList = document.querySelectorAll("[data-checkbox-select-all-target='checkbox']:checked")
+describe('#submitButton', () => {
+  it('should be disabled when form is loaded', (): void => {
+    const submitButton: HTMLInputElement = document.querySelector('#testButton')
 
-    expect(targetsBefore.length).toBe(1)
-
-    // Uncheck all
-    toggleCheckbox.click()
-
-    // Check all
-    toggleCheckbox.click()
-
-    const targetsAfter: NodeList = document.querySelectorAll("[data-checkbox-select-all-target='checkbox']:checked")
-
-    expect(targetsAfter.length).toBe(3)
+    expect(submitButton.disabled).toBe(true)
   })
 })
 
-describe('#refresh', () => {
-  it('change the checkboxAll state', (): void => {
-    const toggleCheckbox: HTMLInputElement = document.querySelector('#checkbox-select-all')
-
-    expect(toggleCheckbox.checked).toBe(true)
-    expect(toggleCheckbox.indeterminate).toBe(true)
-  })
-})

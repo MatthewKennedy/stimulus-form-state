@@ -1,19 +1,12 @@
-# Stimulus Checkbox Select All
-
-[![](https://img.shields.io/npm/dt/stimulus-checkbox-select-all.svg)](https://www.npmjs.com/package/stimulus-checkbox-select-all)
-[![](https://img.shields.io/npm/v/stimulus-checkbox-select-all.svg)](https://www.npmjs.com/package/stimulus-checkbox-select-all)
-[![](https://github.com/stimulus-components/stimulus-checkbox-select-all/workflows/Lint/badge.svg)](https://github.com/stimulus-components/stimulus-checkbox-select-all)
-[![](https://github.com/stimulus-components/stimulus-checkbox-select-all/workflows/Test/badge.svg)](https://github.com/stimulus-components/stimulus-checkbox-select-all)
-[![](https://img.shields.io/github/license/stimulus-components/stimulus-checkbox-select-all.svg)](https://github.com/stimulus-components/stimulus-checkbox-select-all)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/073b5fee-358d-4dbf-b807-52034690f8ef/deploy-status)](https://stimulus-checkbox-select-all.netlify.com)
+# Stimulus Form State
 
 ## Getting started
 
-A Stimulus controller for managing checkbox lists.
+A Stimulus controller for tracking changes to form inputs.
 
 ## 📚 Documentation
 
-See [stimulus-checkbox-select-all documentation](https://stimulus-components.netlify.app/docs/components/stimulus-checkbox-select-all/).
+TODO
 
 ## 👷‍♂️ Contributing
 
