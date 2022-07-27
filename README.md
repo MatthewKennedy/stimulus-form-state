@@ -19,16 +19,15 @@ import StimulusFormState from 'stimulus-form-state'
 
 export default class extends StimulusFormState {
 
-  // override the change methods to manipulate the DOM as you wish
+  // Override the change methods to manipulate the DOM as you wish.
   performChange () {
-    // When a form element has been changed
+    // When a form element has been changed.
     document.getElementById('inputStateSubmitButton').style.display = 'inline'
     super.performChange()
   }
 
-  // override the change methods to manipulate the DOM as you wish
   revertChange () {
-    // If a changed form element is then set back to its original state
+    // If a previously changed form element is then set back to its original state.
     document.getElementById('inputStateSubmitButton').style.display = 'none'
     super.revertChange()
   }

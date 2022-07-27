@@ -6,16 +6,15 @@ export default class extends Controller {
 
   static targets = ['submitButton', 'watch']
 
-  connect () {
-    this.inputWatcher()
-  }
-
   watchTargetConnected (target: HTMLInputElement | HTMLSelectElement) {
-    target.setAttribute('data-action', 'change->form-state#inputWatcher')
+    target.setAttribute('data-action', `change->${this.identifier}#inputWatcher`)
+
+    // Trigger inputWatcher() as individual elements enter the DOM for Turbo Stream
     this.inputWatcher()
   }
 
   watchTargetDisconnect () {
+    // Trigger inputWatcher() as individual elements exit the DOM for Turbo Stream
     this.inputWatcher()
   }
 
