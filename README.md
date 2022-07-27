@@ -6,7 +6,11 @@ A Stimulus controller for tracking changes to form inputs.
 
 ## 📚 Documentation
 
-TODO
+### install
+```bash
+yarn add stimulus-form-state
+```
+
 
 ## 👷‍♂️ Contributing
 

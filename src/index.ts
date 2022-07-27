@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   watchTargetConnected (target: HTMLInputElement | HTMLSelectElement) {
-    target.setAttribute('data-action', 'change->input-state#inputWatcher')
+    target.setAttribute('data-action', 'change->form-state#inputWatcher')
     this.inputWatcher()
   }
 
