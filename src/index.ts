@@ -6,6 +6,10 @@ export default class extends Controller {
 
   static targets = ['submitButton', 'watch']
 
+  connect (){
+    this.inputWatcher()
+  }
+
   watchTargetConnected (target: HTMLInputElement | HTMLSelectElement) {
     target.setAttribute('data-action', `change->${this.identifier}#inputWatcher`)
 
