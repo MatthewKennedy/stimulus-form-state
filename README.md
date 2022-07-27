@@ -39,7 +39,7 @@ export default class extends StimulusFormState {
 
 Add `data-controller="form-state"` to the form element wrapping the elements you want to track the state of, and the submit button.
 
-Add `data-form-state-target="watch"` to any form element you want to track state.
+Add `data-form-state-target="watch"` to any form element you want to track state of.
 
 Add `data-form-state-target="submitButton"` to the from submit button, by default the button will be disabled unless a watched element is changed.
 
@@ -51,3 +51,16 @@ Do not hesitate to contribute to the project by adapting or adding features ! Bu
 ## 📝 License
 
 This project is released under the [MIT](http://opensource.org/licenses/MIT) license.
+
+## ToDo
+
+-[x] input type=text
+-[] input type=hidden
+-[] input type=file
+-[] input type=color
+-[] input type=datepicker
+-[x] textarea
+-[x] select single
+-[x] select multiple
+-[x] radio
+-[x] checkbox
