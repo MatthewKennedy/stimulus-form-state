@@ -54,13 +54,13 @@ This project is released under the [MIT](http://opensource.org/licenses/MIT) lic
 
 ## ToDo
 
--[x] input type=text
--[] input type=hidden
--[] input type=file
--[] input type=color
--[] input type=datepicker
--[x] textarea
--[x] select single
--[x] select multiple
--[x] radio
--[x] checkbox
+- [x] input type=text
+- [ ] input type=hidden
+- [ ] input type=file
+- [ ] input type=color
+- [ ] input type=datepicker
+- [x] textarea
+- [x] select single
+- [x] select multiple
+- [x] radio
+- [x] checkbox
