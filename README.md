@@ -52,14 +52,3 @@ Do not hesitate to contribute to the project by adapting or adding features ! Bu
 ## 📝 License
 
 This project is released under the [MIT](http://opensource.org/licenses/MIT) license.
-
-## ToDo
-
-- [x] input
-- [x] textarea
-- [x] select single
-- [x] select multiple
-- [x] radio
-- [x] checkbox
-- [ ] Add tests for all of the above
-- [ ] Add plugin ability for javascript RTE's
