@@ -32,6 +32,40 @@ beforeEach((): void => {
         <option value="3">Three</option>
       </select>
 
+      <div>
+        <div>
+          <input type="radio" name="exampleRadios" id="testRadios1" value="option1" checked data-form-state-target="watch">
+          <label for="exampleRadios1">
+            Default radio
+          </label>
+        </div>
+        <div>
+          <input type="radio" name="exampleRadios" id="testRadios2" value="option2" data-form-state-target="watch">
+          <label for="exampleRadios2">
+            Second default radio
+          </label>
+        </div>
+        <div>
+          <input type="radio" name="exampleRadios" id="testRadios3" value="option3" data-form-state-target="watch">
+          <label for="exampleRadios3">
+            Third radio
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <input type="checkbox" value="" id="flexCheckDefault" data-form-state-target="watch">
+        <label for="flexCheckDefault">
+          Default checkbox
+        </label>
+      </div>
+      <div>
+        <input type="checkbox" value="" id="flexCheckChecked" checked data-form-state-target="watch">
+        <label for="flexCheckChecked">
+          Checked checkbox
+        </label>
+      </div>
+
       <button id="testButton" name="button" type="submit" data-form-state-target="submitButton" >
         Update
       </button>
@@ -85,11 +119,6 @@ describe('input type=text', () => {
 })
 
 describe('textarea', () => {
-  it('should have Stimulus action attribute added', (): void => {
-    const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
-    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
-  })
-
   it('should enable submit button when changed', (): void => {
     const event = new Event("change")
     const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
@@ -119,11 +148,6 @@ describe('textarea', () => {
 })
 
 describe('select (single no empty value)', () => {
-  it('should have Stimulus action attribute added', (): void => {
-    const testEl: HTMLTextAreaElement = document.querySelector('#testSelectSingle')
-    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
-  })
-
   it('should enable submit button when changed', (): void => {
     const event = new Event("change")
     const testEl: HTMLTextAreaElement = document.querySelector('#testSelectSingle')
@@ -155,11 +179,6 @@ describe('select (single no empty value)', () => {
 
 
 describe('select (multiple no empty value)', () => {
-  it('should have Stimulus action attribute added', (): void => {
-    const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
-    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
-  })
-
   it('should enable submit button when changed', (): void => {
     const event = new Event("change")
     const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
@@ -190,3 +209,57 @@ describe('select (multiple no empty value)', () => {
   })
 })
 
+
+describe('radio buttons', () => {
+  it('should enable submit button when changed', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testRadios2')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl.click()
+
+    expect(submitButton.disabled).toBe(false)
+  })
+
+  it('should revert submit button to disabled when changed back to original value', (): void => {
+    const testEl1: HTMLTextAreaElement = document.querySelector('#testRadios1')
+    const testEl2: HTMLTextAreaElement = document.querySelector('#testRadios2')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl2.click()
+
+    expect(submitButton.disabled).toBe(false)
+
+    testEl1.click()
+
+    expect(submitButton.disabled).toBe(true)
+  })
+})
+
+describe('checkbox', () => {
+  it('should enable submit button when changed', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#flexCheckChecked')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl.click()
+
+    expect(submitButton.disabled).toBe(false)
+  })
+
+  it('should revert submit button to disabled when changed back to original value', (): void => {
+    const testEl1: HTMLTextAreaElement = document.querySelector('#flexCheckDefault')
+    const testEl2: HTMLTextAreaElement = document.querySelector('#flexCheckChecked')
+    const submitButton: HTMLButtonElement = document.querySelector('#testButton')
+
+    testEl2.click()
+
+    expect(submitButton.disabled).toBe(false)
+
+    testEl1.click()
+
+    expect(submitButton.disabled).toBe(false)
+
+    testEl2.click()
+    testEl1.click()
+    expect(submitButton.disabled).toBe(true)
+  })
+})
