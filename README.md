@@ -46,6 +46,16 @@ Add `data-form-state-target="watch"` to the `<select>`, `<textarea>` or `<input>
 
 Add `data-form-state-target="submitButton"` to the from submit button, by default the button will be disabled unless a watched element is changed.
 
+An example:
+```html
+<form data-controller="form-state" action="/customer" method="post">
+  <input data-form-state-target="watch" type="text" value="Joe" name="first_name">
+  <input data-form-state-target="watch" type="text" value="Bloggs" name="last_name">
+  <textarea data-form-state-target="watch" name="description">Some Value.</textarea>
+
+  <button type="submit" data-form-state-target="submitButton">Save</button>
+</form>
+```
 
 ## 👷‍♂️ Contributing
 
