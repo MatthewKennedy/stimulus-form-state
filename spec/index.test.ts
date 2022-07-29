@@ -18,7 +18,7 @@ beforeEach((): void => {
 
       <input type="text" value="some value" id="testTextInput" data-form-state-target="watch">
 
-      <input type="text" value="some value" id="testTextInputWithCustomAction" data-form-state-target="watch" data-action="custom->form-state#inputWatcher">
+      <input type="text" value="some value" id="testTextInputWithCustomAction" data-form-state-target="watch" data-action="custom->form-state#checkForChanges">
 
       <textarea id="testTextarea" rows="3" data-form-state-target="watch">wonderful</textarea>
 
@@ -68,7 +68,7 @@ beforeEach((): void => {
         </label>
       </div>
 
-      <button id="testButton" name="button" type="submit" data-form-state-target="submitButton" >
+      <button id="testButton" name="button" type="submit" data-form-state-target="saveButton" >
         Update
       </button>
     </form>
@@ -86,14 +86,14 @@ describe('#submitButton', () => {
 describe('input type=text with existing data-action attribute', () => {
   it('should not have the action auto added', (): void => {
     const testEl: HTMLInputElement = document.querySelector('#testTextInputWithCustomAction')
-    expect(testEl.dataset.action).toBe('custom->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('custom->form-state#checkForChanges')
   })
 })
 
 describe('input type=text', () => {
   it('should have the correct Stimulus action attribute added (input)', (): void => {
     const testEl: HTMLInputElement = document.querySelector('#testTextInput')
-    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('input->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {
@@ -129,7 +129,7 @@ describe('input type=text', () => {
 describe('textarea', () => {
   it('should have the correct Stimulus action attribute added (input)', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
-    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('input->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {
@@ -163,7 +163,7 @@ describe('textarea', () => {
 describe('select (single no empty value)', () => {
   it('should have the correct Stimulus action attribute added (change)', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#testSelectSingle')
-    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('change->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {
@@ -199,7 +199,7 @@ describe('select (single no empty value)', () => {
 describe('select (multiple no empty value)', () => {
   it('should have the correct Stimulus action attribute added (change)', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
-    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('change->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {
@@ -236,7 +236,7 @@ describe('select (multiple no empty value)', () => {
 describe('radio buttons', () => {
   it('should have the correct Stimulus action attribute added (input)', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#testRadios2')
-    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('input->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {
@@ -266,7 +266,7 @@ describe('radio buttons', () => {
 describe('checkbox', () => {
   it('should have the correct Stimulus action attribute added (input)', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#flexCheckChecked')
-    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+    expect(testEl.dataset.action).toBe('input->form-state#checkForChanges')
   })
 
   it('should enable submit button when changed', (): void => {

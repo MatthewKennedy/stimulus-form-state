@@ -2,61 +2,56 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   watchTargets: HTMLInputElement[] | HTMLSelectElement[] | HTMLTextAreaElement[]
-  submitButtonTarget: HTMLInputElement
+  saveButtonTarget: HTMLInputElement
 
-  static targets = ['submitButton', 'watch']
+  static targets = ['saveButton', 'watch']
 
   connect () {
-    this.inputWatcher()
+    this.checkForChanges()
   }
 
   watchTargetConnected (target: HTMLInputElement | HTMLSelectElement) {
-    if (target.hasAttribute('data-action')) return
-
-    if (target.tagName === 'SELECT') {
-      target.setAttribute('data-action', `change->${this.identifier}#inputWatcher`)
-    } else {
-      target.setAttribute('data-action', `input->${this.identifier}#inputWatcher`)
-    }
+    // Auto attach the Stimulus actions to the input and select DOM elements.
+    this.attachActionAttributes (target)
 
     // Trigger inputWatcher() as individual elements enter the DOM for Turbo Stream
-    this.inputWatcher()
+    this.checkForChanges()
   }
 
   watchTargetDisconnect () {
     // Trigger inputWatcher() as individual elements exit the DOM for Turbo Stream
-    this.inputWatcher()
+    this.checkForChanges()
   }
 
-  inputWatcher () {
+  checkForChanges () {
     const changeCount = []
 
     this.watchTargets.forEach((formEl: any) => {
       if (formEl.type === 'checkbox' || formEl.type === 'radio') {
         if (formEl.checked !== formEl.defaultChecked) changeCount.push(1)
       } else if (formEl.tagName === 'SELECT') {
-        if (this.multiSelect(formEl) === true) changeCount.push(1)
+        if (this.handleSelectChange(formEl) === true) changeCount.push(1)
       } else {
         if (formEl.value !== formEl.defaultValue) changeCount.push(1)
       }
     })
 
     if (changeCount.length > 0) {
-      this.performChange()
+      this.enableChangeControles()
     } else {
-      this.revertChange()
+      this.disableChangeControles()
     }
   }
 
-  performChange () {
-    this.submitButtonTarget.disabled = false
+  enableChangeControles () {
+    this.saveButtonTarget.disabled = false
   }
 
-  revertChange () {
-    this.submitButtonTarget.disabled = true
+  disableChangeControles () {
+    this.saveButtonTarget.disabled = true
   }
 
-  multiSelect (selectEl: HTMLSelectElement) {
+  handleSelectChange (selectEl: HTMLSelectElement) {
     let hasChanged: boolean = false
     let defaultSelected: number = 0
     let i: number
@@ -72,5 +67,15 @@ export default class extends Controller {
 
     if (hasChanged && !selectEl.multiple) hasChanged = (defaultSelected !== selectEl.selectedIndex)
     if (hasChanged) return true
+  }
+
+  attachActionAttributes (target: HTMLInputElement | HTMLSelectElement) {
+    if (target.hasAttribute('data-action')) return
+
+    if (target.tagName === 'SELECT') {
+      target.setAttribute('data-action', `change->${this.identifier}#checkForChanges`)
+    } else {
+      target.setAttribute('data-action', `input->${this.identifier}#checkForChanges`)
+    }
   }
 }
