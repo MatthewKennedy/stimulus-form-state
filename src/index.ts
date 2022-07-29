@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   watchTargets: HTMLInputElement[] | HTMLSelectElement[] | HTMLTextAreaElement[]
-  saveButtonTarget: HTMLInputElement
+  saveButtonTarget: HTMLInputElement | HTMLButtonElement
 
   static targets = ['saveButton', 'watch']
 
