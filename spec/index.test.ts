@@ -16,7 +16,9 @@ beforeEach((): void => {
   document.body.innerHTML = `
     <form data-controller="form-state">
 
-      <input type="text" value="xxx" id="productName" data-form-state-target="watch">
+      <input type="text" value="some value" id="testTextInput" data-form-state-target="watch">
+
+      <input type="text" value="some value" id="testTextInputWithCustomAction" data-form-state-target="watch" data-action="custom->form-state#inputWatcher">
 
       <textarea id="testTextarea" rows="3" data-form-state-target="watch">wonderful</textarea>
 
@@ -81,46 +83,57 @@ describe('#submitButton', () => {
   })
 })
 
-describe('input type=text', () => {
-  it('should have Stimulus action attribute added', (): void => {
-    const testInput: HTMLInputElement = document.querySelector('#productName')
+describe('input type=text with existing data-action attribute', () => {
+  it('should not have the action auto added', (): void => {
+    const testEl: HTMLInputElement = document.querySelector('#testTextInputWithCustomAction')
+    expect(testEl.dataset.action).toBe('custom->form-state#inputWatcher')
+  })
+})
 
-    expect(testInput.dataset.action).toBe('change->form-state#inputWatcher')
+describe('input type=text', () => {
+  it('should have the correct Stimulus action attribute added (input)', (): void => {
+    const testEl: HTMLInputElement = document.querySelector('#testTextInput')
+    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
   })
 
   it('should enable submit button when changed', (): void => {
-    const event = new Event("change")
+    const event = new Event("input")
 
-    const testInput: HTMLInputElement = document.querySelector('#productName')
+    const testEl: HTMLInputElement = document.querySelector('#testTextInput')
     const submitButton: HTMLInputElement = document.querySelector('#testButton')
 
-    testInput.value = 'foo'
-    testInput.dispatchEvent(event)
+    testEl.value = 'foo'
+    testEl.dispatchEvent(event)
 
     expect(submitButton.disabled).toBe(false)
   })
 
   it('should revert submit button to disabled when changed back to original value', (): void => {
-    const event = new Event("change")
+    const event = new Event("input")
 
-    const testInput: HTMLInputElement = document.querySelector('#productName')
+    const testEl: HTMLInputElement = document.querySelector('#testTextInput')
     const submitButton: HTMLInputElement = document.querySelector('#testButton')
 
-    testInput.value = 'foo'
-    testInput.dispatchEvent(event)
+    testEl.value = 'foo'
+    testEl.dispatchEvent(event)
 
     expect(submitButton.disabled).toBe(false)
 
-    testInput.value = 'xxx'
-    testInput.dispatchEvent(event)
+    testEl.value = 'some value'
+    testEl.dispatchEvent(event)
 
     expect(submitButton.disabled).toBe(true)
   })
 })
 
 describe('textarea', () => {
+  it('should have the correct Stimulus action attribute added (input)', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
+    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+  })
+
   it('should enable submit button when changed', (): void => {
-    const event = new Event("change")
+    const event = new Event("input")
     const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
     const submitButton: HTMLButtonElement = document.querySelector('#testButton')
 
@@ -131,7 +144,7 @@ describe('textarea', () => {
   })
 
   it('should revert submit button to disabled when changed back to original value', (): void => {
-    const event = new Event("change")
+    const event = new Event("input")
     const testEl: HTMLTextAreaElement = document.querySelector('#testTextarea')
     const submitButton: HTMLButtonElement = document.querySelector('#testButton')
 
@@ -148,6 +161,11 @@ describe('textarea', () => {
 })
 
 describe('select (single no empty value)', () => {
+  it('should have the correct Stimulus action attribute added (change)', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testSelectSingle')
+    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
+  })
+
   it('should enable submit button when changed', (): void => {
     const event = new Event("change")
     const testEl: HTMLTextAreaElement = document.querySelector('#testSelectSingle')
@@ -179,6 +197,11 @@ describe('select (single no empty value)', () => {
 
 
 describe('select (multiple no empty value)', () => {
+  it('should have the correct Stimulus action attribute added (change)', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
+    expect(testEl.dataset.action).toBe('change->form-state#inputWatcher')
+  })
+
   it('should enable submit button when changed', (): void => {
     const event = new Event("change")
     const testEl: HTMLTextAreaElement = document.querySelector('#testMultipleSingle')
@@ -211,6 +234,11 @@ describe('select (multiple no empty value)', () => {
 
 
 describe('radio buttons', () => {
+  it('should have the correct Stimulus action attribute added (input)', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#testRadios2')
+    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+  })
+
   it('should enable submit button when changed', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#testRadios2')
     const submitButton: HTMLButtonElement = document.querySelector('#testButton')
@@ -236,6 +264,11 @@ describe('radio buttons', () => {
 })
 
 describe('checkbox', () => {
+  it('should have the correct Stimulus action attribute added (input)', (): void => {
+    const testEl: HTMLTextAreaElement = document.querySelector('#flexCheckChecked')
+    expect(testEl.dataset.action).toBe('input->form-state#inputWatcher')
+  })
+
   it('should enable submit button when changed', (): void => {
     const testEl: HTMLTextAreaElement = document.querySelector('#flexCheckChecked')
     const submitButton: HTMLButtonElement = document.querySelector('#testButton')

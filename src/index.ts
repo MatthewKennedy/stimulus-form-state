@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  watchTargets: HTMLInputElement[] | HTMLSelectElement[]
+  watchTargets: HTMLInputElement[] | HTMLSelectElement[] | HTMLTextAreaElement[]
   submitButtonTarget: HTMLInputElement
 
   static targets = ['submitButton', 'watch']
@@ -11,7 +11,13 @@ export default class extends Controller {
   }
 
   watchTargetConnected (target: HTMLInputElement | HTMLSelectElement) {
-    target.setAttribute('data-action', `change->${this.identifier}#inputWatcher`)
+    if (target.hasAttribute('data-action')) return
+
+    if (target.tagName === 'SELECT') {
+      target.setAttribute('data-action', `change->${this.identifier}#inputWatcher`)
+    } else {
+      target.setAttribute('data-action', `input->${this.identifier}#inputWatcher`)
+    }
 
     // Trigger inputWatcher() as individual elements enter the DOM for Turbo Stream
     this.inputWatcher()
@@ -51,8 +57,8 @@ export default class extends Controller {
   }
 
   multiSelect (selectEl: HTMLSelectElement) {
-    let hasChanged = false
-    let defaultSelected = 0
+    let hasChanged: boolean = false
+    let defaultSelected: number = 0
     let i: number
     let optionsCount: number
     let option: HTMLOptionElement
