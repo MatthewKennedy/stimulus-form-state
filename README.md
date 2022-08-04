@@ -26,16 +26,15 @@ export default class extends StimulusFormState {
   enableChangeControles () {
     // When a form element has been changed.
     document.getElementById('inputStateSubmitButton').style.display = 'inline'
-    super.performChange()
+    super.enableChangeControles()
   }
 
   disableChangeControles () {
     // If a previously changed form element is then set back to its original state.
     document.getElementById('inputStateSubmitButton').style.display = 'none'
-    super.revertChange()
+    super.disableChangeControles()
   }
 }
-
 ```
 
 ### In The DOM
