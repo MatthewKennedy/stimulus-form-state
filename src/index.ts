@@ -3,6 +3,7 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   watchTargets: HTMLInputElement[] | HTMLSelectElement[] | HTMLTextAreaElement[]
   saveButtonTarget: HTMLInputElement | HTMLButtonElement
+  hasSaveButtonTarget: boolean
 
   static targets = ['saveButton', 'watch']
 
@@ -44,11 +45,11 @@ export default class extends Controller {
   }
 
   enableChangeControles () {
-    this.saveButtonTarget.disabled = false
+    if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = false
   }
 
   disableChangeControles () {
-    this.saveButtonTarget.disabled = true
+    if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = true
   }
 
   handleSelectChange (selectEl: HTMLSelectElement) {

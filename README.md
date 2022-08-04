@@ -23,13 +23,13 @@ import StimulusFormState from 'stimulus-form-state'
 export default class extends StimulusFormState {
 
   // Override the change methods to manipulate the DOM as you wish.
-  performChange () {
+  enableChangeControles () {
     // When a form element has been changed.
     document.getElementById('inputStateSubmitButton').style.display = 'inline'
     super.performChange()
   }
 
-  revertChange () {
+  disableChangeControles () {
     // If a previously changed form element is then set back to its original state.
     document.getElementById('inputStateSubmitButton').style.display = 'none'
     super.revertChange()
@@ -44,16 +44,16 @@ Add `data-controller="form-state"` to the form element wrapping the elements you
 
 Add `data-form-state-target="watch"` to the `<select>`, `<textarea>` or `<input>` elements that you want to track state of. The correct stimulus data-action will be added to the watched element unless a preexisting data-action is present.
 
-Add `data-form-state-target="submitButton"` to the from submit button, by default the button will be disabled unless a watched element is changed.
+Add `data-form-state-target="saveButton"` to the from submit button, by default the button will be disabled unless a watched element is changed.
 
 An example:
 ```html
 <form data-controller="form-state" action="/customer" method="post">
   <input data-form-state-target="watch" type="text" value="Joe" name="first_name">
-  <input data-form-state-target="watch" type="text" value="Bloggs" name="last_name">
+  <input data-form-state-target="watch" type="text" value="Blogs" name="last_name">
   <textarea data-form-state-target="watch" name="description">Some Value.</textarea>
 
-  <button type="submit" data-form-state-target="submitButton">Save</button>
+  <button type="submit" data-form-state-target="saveButton">Save</button>
 </form>
 ```
 
