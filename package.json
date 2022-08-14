@@ -1,6 +1,6 @@
 {
   "name": "stimulus-form-state",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Stimulus controller for tracking changes on form elements.",
   "keywords": [
     "stimulus",
