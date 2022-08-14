@@ -71,12 +71,14 @@ export default class extends Controller {
   }
 
   attachActionAttributes (target: HTMLInputElement | HTMLSelectElement) {
-    if (target.hasAttribute('data-action')) return
+    if (target.hasAttribute('data-action')) {
+      if (target.dataset.action.includes(`${this.identifier}#checkForChanges`)) return
+    }
 
-    if (target.tagName === 'SELECT') {
-      target.setAttribute('data-action', `change->${this.identifier}#checkForChanges`)
+    if (target.hasAttribute('data-action')) {
+      target.setAttribute('data-action', `${this.identifier}#checkForChanges ${target.dataset.action}`)
     } else {
-      target.setAttribute('data-action', `input->${this.identifier}#checkForChanges`)
+      target.setAttribute('data-action', `${this.identifier}#checkForChanges`)
     }
   }
 }
