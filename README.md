@@ -5,7 +5,7 @@
 ## Getting started
 
 A Stimulus controller for tracking changes to form elements such as: `<input>`, `<select>`, `<textarea>`
-allowing you to manipulate the form submit `<button>` or other DOM elements if a form element has been changed from its original state.
+allowing you to manipulate the form submit `<button>` or other DOM elements if a form has changed from its original state.
 
 ## 📚 Documentation
 
@@ -18,7 +18,7 @@ yarn add stimulus-form-state
 ```javascript
 // javascript/controllers/form_state_controller.js
 
-import StimulusFormState from 'stimulus-form-state'
+import StimulusFormState from '@matthewkennedy/stimulus-form-state'
 
 export default class extends StimulusFormState {
 
@@ -39,9 +39,9 @@ export default class extends StimulusFormState {
 
 ### In The DOM
 
-Add `data-controller="form-state"` to the form element wrapping the elements you want to track the state of, including the submit `<button>`.
+Add `data-controller="form-state"` to the `<form>` wrapping the elements you want to track the state of, including the submit `<button>`.
 
-Add `data-form-state-target="watch"` to the `<select>`, `<textarea>` or `<input>` elements that you want to track state of. The correct stimulus data-action will be added to the watched element unless a preexisting data-action is present.
+Add `data-form-state-target="watch"` to the `<select>`, `<textarea>` or `<input>` elements that you want to track state of. The correct stimulus data-action will be added to the watched elements.
 
 Add `data-form-state-target="saveButton"` to the from submit button, by default the button will be disabled unless a watched element is changed.
 
